@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192">
+  <defs>
+    <linearGradient id="greenGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#10b981;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#059669;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background Circle -->
+  <circle cx="96" cy="96" r="92" fill="url(#greenGradient)"/>
+  
+  <!-- Shopping Bag -->
+  <path d="M 58 67 L 58 144 C 58 150 62 154 68 154 L 124 154 C 130 154 134 150 134 144 L 134 67 Z" 
+        fill="white" stroke="white" stroke-width="4"/>
+  
+  <!-- Bag Handle -->
+  <path d="M 73 67 C 73 54 80 42 96 42 C 112 42 119 54 119 67" 
+        fill="none" stroke="white" stroke-width="6" stroke-linecap="round"/>
+  
+  <!-- Leaf Detail -->
+  <path d="M 96 58 Q 106 48 112 54 Q 108 61 96 67 Z" 
+        fill="#d1fae5" opacity="0.8"/>
+</svg>
