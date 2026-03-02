@@ -2,23 +2,24 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import emptyimg from "../Assets/images/preview.png";
+import config from "../config/env";
 
 export default function Orders() {
   async function getUserOrder() {
     const userID = localStorage.getItem("userID");
     return axios.get(
-      `https://ecommerce.routemisr.com/api/v1/orders/user/${userID}`,
+      `${config.apiBaseUrl}/orders/user/${userID}`,
     );
   }
 
-  const { isLoading, data } = useQuery({
+  const ordersQuery = useQuery({
     queryKey: ["getUserOrder"],
     queryFn: getUserOrder,
   });
 
-  const orders = data?.data || [];
+  const orders = ordersQuery.data?.data || [];
 
-  if (isLoading) {
+  if (ordersQuery.isLoading) {
     return (
       <div className="max-w-6xl px-4 py-6 mx-auto sm:px-6 lg:px-8 sm:py-10">
         <div className="w-40 mb-6 bg-gray-100 rounded-full h-7 animate-pulse" />

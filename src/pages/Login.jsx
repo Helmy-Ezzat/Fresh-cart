@@ -5,6 +5,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { Audio } from "react-loader-spinner";
 import { useUserStore } from "../stores";
+import config from "../config/env";
 
 export default function Login() {
   const setUserToken = useUserStore((state) => state.setUserToken);
@@ -18,7 +19,7 @@ export default function Login() {
     setIsLoading(true);
     try {
       const res = await axios.post(
-        `https://ecommerce.routemisr.com/api/v1/auth/signin`,
+        `${config.apiBaseUrl}/auth/signin`,
         values,
       );
 

@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Audio } from 'react-loader-spinner';
+import config from "../config/env";
 
 export default function Register() {
   const [errMeg, setErrMeg] = useState();
@@ -16,7 +17,7 @@ export default function Register() {
     setIsLoading(true);
     try {
       const res = await axios.post(
-        `https://ecommerce.routemisr.com/api/v1/auth/signup`,
+        `${config.apiBaseUrl}/auth/signup`,
         values
       );
 

@@ -3,6 +3,7 @@ import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import emptyimg from "../Assets/images/preview.png";
+import { Trash2, Eraser } from "lucide-react";
 
 export default function Cart() {
   const updateCount = useCartStore((state) => state.updateCount);
@@ -13,12 +14,12 @@ export default function Cart() {
   const getUserCart = useCartStore((state) => state.getUserCart);
   const numOfCartItems = useCartStore((state) => state.numOfCartItems);
   
-  const { isError, isLoading } = useQuery({
+  const cartQuery = useQuery({
     queryKey: ["getUserCart"],
     queryFn: getUserCart,
   });
 
-  if (isLoading) {
+  if (cartQuery.isLoading) {
     return (
       <section className="max-w-6xl px-4 pt-4 pb-10 mx-auto sm:px-6 lg:px-8 sm:pt-6">
         <div className="flex flex-col justify-between gap-3 mb-4 sm:flex-row sm:items-center animate-pulse">
@@ -62,7 +63,7 @@ export default function Cart() {
     );
   }
 
-  if (isError || !allProducts || allProducts.length === 0) {
+  if (cartQuery.isError || !allProducts || allProducts.length === 0) {
     return (
       <div className="flex min-h-[60vh] justify-center items-center px-4">
         <div className="space-y-3 text-center">
@@ -139,7 +140,7 @@ export default function Cart() {
               className="inline-flex items-center gap-2 rounded-full border border-red-200 text-red-600 text-xs sm:text-sm px-4 py-1.5 hover:bg-red-50 transition"
               onClick={clearCart}
             >
-              <i className="fa-solid fa-broom" /> clear
+              <Eraser size={16} /> clear
             </button>
             <span className="text-xs text-gray-500 sm:text-sm">
               {numOfCartItems} items in your cart
@@ -171,7 +172,7 @@ export default function Cart() {
                     className="inline-flex items-center gap-1 px-3 py-1 mt-2 text-xs text-red-600 transition border border-red-200 rounded-full sm:text-sm hover:bg-red-50"
                     onClick={() => myDeleteProduct(product.product.id)}
                   >
-                    <i className="fa-solid fa-trash" /> Remove
+                    <Trash2 size={16} /> Remove
                   </button>
                 </div>
 

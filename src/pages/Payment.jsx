@@ -3,6 +3,7 @@ import axios from "axios";
 import { useCartStore } from "../stores";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import config from "../config/env";
 
 export default function Payment() {
   const cartID = useCartStore((state) => state.cartID);
@@ -24,7 +25,7 @@ export default function Payment() {
     };
     axios
       .post(
-        `https://ecommerce.routemisr.com/api/v1/orders/checkout-session/${cartID}`,
+        `${config.apiBaseUrl}/orders/checkout-session/${cartID}`,
         shippingObject,
         {
           headers: { token: localStorage.getItem("userToken") },
@@ -56,7 +57,7 @@ export default function Payment() {
     };
     axios
       .post(
-        `https://ecommerce.routemisr.com/api/v1/orders/${cartID}`,
+        `${config.apiBaseUrl}/orders/${cartID}`,
         shippingObject,
         {
           headers: { token: localStorage.getItem("userToken") },

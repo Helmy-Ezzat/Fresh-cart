@@ -5,6 +5,7 @@ import { useCartStore, useWishlistStore } from "../stores";
 import toast from "react-hot-toast";
 import emptyimg from "../Assets/images/preview.png";
 import { ProductCard, SkeletonProductCard } from "../components";
+import config from "../config/env";
 
 export default function WishList() {
   const queryClient = useQueryClient();
@@ -12,14 +13,10 @@ export default function WishList() {
   const deleteProduct = useWishlistStore((state) => state.deleteProduct);
   const getWishlist = useWishlistStore((state) => state.getWishlist);
 
-  useEffect(() => {
-    getWishlist();
-  }, [getWishlist]);
-
   async function getWishList() {
     try {
       return await axios.get(
-        "https://ecommerce.routemisr.com/api/v1/wishlist",
+        `${config.apiBaseUrl}/wishlist`,
         { headers: { token: localStorage.getItem("userToken") } },
       );
     } catch (error) {
@@ -41,12 +38,16 @@ export default function WishList() {
     }
   }
 
-  const { isLoading, data } = useQuery({
+  const wishlistQuery = useQuery({
     queryKey: ["getWishList"],
     queryFn: getWishList,
   });
 
-  if (isLoading) {
+    useEffect(() => {
+    getWishlist();
+  }, [getWishlist]);
+
+  if (wishlistQuery.isLoading) {
     return (
       <div className="max-w-6xl px-4 pt-4 mx-auto sm:px-6 lg:px-8 sm:pt-6">
         <span className="w-40 h-8 mb-6 text-2xl font-semibold text-gray-800 bg-gray-200 rounded-full animate-pulse" />
@@ -58,7 +59,7 @@ export default function WishList() {
       </div>
     );
   }
-  if (!data?.data.count) {
+  if (!wishlistQuery.data?.data.count) {
     return (
       <>
         <div className="d-flex justify-content-center">
@@ -94,7 +95,7 @@ export default function WishList() {
           My Wish List
         </h1>
         <div className="grid grid-cols-2 gap-4 products sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 sm:gap-5">
-          {data?.data.data.map((product, idx) => (
+          {wishlistQuery.data?.data.data.map((product, idx) => (
             <ProductCard
               key={idx}
               product={product}

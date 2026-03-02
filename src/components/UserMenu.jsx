@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useUserStore, useCartStore, useWishlistStore } from '../../stores';
+import { useUserStore, useCartStore, useWishlistStore } from '../stores';
+import { ShoppingCart, Heart, Receipt, LogOut } from 'lucide-react';
 
 export default function UserMenu() {
   const [isOpen, setIsOpen] = useState(false);
@@ -56,7 +57,7 @@ export default function UserMenu() {
       >
         {userInitial}
         {totalNotifications > 0 && (
-          <span className="absolute -top-1 -right-1 inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-red-500 rounded-full border-2 border-white shadow-lg animate-pulse">
+          <span className="absolute -top-1 -right-1 inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-red-500 rounded-full border-2 border-white shadow-lg">
             {totalNotifications > 99 ? '99+' : totalNotifications}
           </span>
         )}
@@ -85,7 +86,7 @@ export default function UserMenu() {
                 className="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-emerald-50 transition-colors group no-underline"
               >
                 <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-emerald-100 text-emerald-600 group-hover:bg-emerald-200 transition-colors">
-                  <i className="fa-solid fa-shopping-cart text-sm"></i>
+                  <ShoppingCart size={16} />
                 </div>
                 <div className="flex-1">
                   <span className="font-medium">Shopping Cart</span>
@@ -103,7 +104,7 @@ export default function UserMenu() {
                 className="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-rose-50 transition-colors group no-underline"
               >
                 <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-rose-100 text-rose-600 group-hover:bg-rose-200 transition-colors">
-                  <i className="fa-solid fa-heart text-sm"></i>
+                  <Heart size={16} />
                 </div>
                 <div className="flex-1">
                   <span className="font-medium">Wishlist</span>
@@ -121,7 +122,7 @@ export default function UserMenu() {
                 className="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-blue-50 transition-colors group no-underline"
               >
                 <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-blue-100 text-blue-600 group-hover:bg-blue-200 transition-colors">
-                  <i className="fa-solid fa-receipt text-sm"></i>
+                  <Receipt size={16} />
                 </div>
                 <div className="flex-1">
                   <span className="font-medium">My Orders</span>
@@ -137,7 +138,7 @@ export default function UserMenu() {
                 className="flex items-center gap-3 w-full px-4 py-2.5 text-sm text-red-600 hover:bg-red-50 transition-colors group"
               >
                 <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-red-100 text-red-600 group-hover:bg-red-200 transition-colors">
-                  <i className="fa-solid fa-sign-out-alt text-sm"></i>
+                  <LogOut size={16} />
                 </div>
                 <span className="font-medium">Logout</span>
               </button>

@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { useCartStore } from "../../stores";
+import { useCartStore } from "../stores";
 import { Loader2, CheckCircle2, ShoppingCart } from "lucide-react";
 
 export default function AddToCartButton({

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState, useMemo } from "react";
-import { useCartStore, useWishlistStore } from "../../stores";
+import { useWishlistStore } from "../stores";
 import { Heart, Loader2, Star } from "lucide-react";
 import AddToCartButton from "./AddToCartButton";
 
@@ -43,43 +43,41 @@ export default function ProductCard({
   };
 
   return (
-    <div className="relative overflow-hidden transition duration-200 ease-out bg-white shadow-sm group rounded-xl sm:rounded-2xl hover:shadow-lg hover:-translate-y-1">
-      <div className="flex flex-col h-full px-2 pt-2 sm:px-3 sm:pt-3">
-        <Link className="flex-1 block" to={`/productDetails/${product.id}`}>
+    <div className="relative overflow-hidden transition duration-200 ease-out bg-white shadow-sm border group rounded-xl sm:rounded-2xl hover:shadow-lg hover:-translate-y-1">
+      <div className="flex flex-col px-2">
+        <Link className="flex-1 block no-underline" to={`/productDetails/${product.id}`}>
           <div className="flex flex-col items-center h-full gap-1.5 sm:gap-2">
-            <div className="flex items-center justify-center w-full overflow-hidden rounded-lg sm:rounded-xl bg-gray-50">
               <img
                 src={product.imageCover}
                 className="object-contain w-full h-full transition-transform duration-200 group-hover:scale-105"
                 alt={product.title}
               />
-            </div>
-            <div className="w-full">
-              <h6 className="text-[10px] sm:text-xs leading-4 sm:leading-5 tracking-wide uppercase text-main">
+            <div className="">
+              <h6 className="text-sm lg:text-lg tracking-wide uppercase font-medium text-emerald-500">
                 {product.category.name}
               </h6>
-              <h3 className="text-xs sm:text-sm font-medium text-gray-800 line-clamp-2 leading-tight sm:leading-normal">
-                {product.title}
+              <h3 className="text-xs sm:text-sm font-semibold text-gray-800 line-clamp-2 leading-tight min-h-[2.5rem] sm:min-h-[2.8rem]">
+                {product.title.slice(1,30)}
               </h3>
-              <div className="flex items-center justify-between mt-0.5 sm:mt-1 text-xs sm:text-sm text-gray-700">
+              <div className="flex items-center justify-between pt-0.5 sm:pt-1">
                 {product.priceAfterDiscount ? (
-                  <p className="flex items-center gap-1">
-                    <span className="text-[10px] sm:text-xs text-gray-400 line-through">
-                      {product.price}
+                  <div className="flex flex-col gap-0.5">
+                    <span className="text-[10px] sm:text-xs text-gray-400 line-through leading-none">
+                      {product.price} EGP
                     </span>
-                    <span className="text-xs sm:text-sm font-semibold text-emerald-600">
-                      {product.priceAfterDiscount}
+                    <span className="text-sm sm:text-base font-bold text-emerald-600 leading-none">
+                      {product.priceAfterDiscount} EGP
                     </span>
-                  </p>
+                  </div>
                 ) : (
-                  <p className="text-xs sm:text-sm font-semibold text-emerald-600">
-                    {product.price}
+                  <p className="text-sm sm:text-base font-bold text-emerald-600">
+                    {product.price} EGP
                   </p>
                 )}
-                <p className="flex items-center gap-0.5 sm:gap-1">
+                <div className="flex items-center gap-0.5 sm:gap-1 px-1.5 sm:px-2 py-0.5 sm:py-1 bg-yellow-50 rounded-md">
                   <Star className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-yellow-400 text-yellow-400" />
-                  <span className="text-[10px] sm:text-xs">{product.ratingsAverage}</span>
-                </p>
+                  <span className="text-[10px] sm:text-xs font-semibold text-gray-700">{product.ratingsAverage}</span>
+                </div>
               </div>
             </div>
           </div>

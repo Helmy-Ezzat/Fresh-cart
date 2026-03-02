@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { useCartStore, useWishlistStore } from "../stores";
 import { ProductCard, SkeletonProductCard } from "../components";
+import config from "../config/env";
 
 export default function Products() {
   const addProductToCart = useCartStore((state) => state.addProductToCart);
@@ -54,24 +55,24 @@ export default function Products() {
   }
 
   async function getAllProducts() {
-    return axios.get("https://ecommerce.routemisr.com/api/v1/products");
+    return axios.get(`${config.apiBaseUrl}/products`);
   }
 
-  const { isLoading, data } = useQuery({
+  const productsQuery = useQuery({
     queryKey: ["getAllProducts"],
     queryFn: getAllProducts,
   });
 
-  if (isLoading) {
+  if (productsQuery.isLoading) {
     return (
       <section className="max-w-6xl px-4 pt-4 mx-auto sm:px-6 lg:px-8 sm:pt-6">
         <div className="flex flex-col justify-between gap-3 mb-4 sm:flex-row sm:items-center animate-pulse">
-          <div>
-            <div className="w-40 h-6 mb-2 bg-gray-100 rounded-full" />
-            <div className="w-56 h-4 bg-gray-100 rounded-full" />
+          <div className="space-y-2">
+            <div className="w-40 h-7 bg-gray-100 rounded-lg" />
+            <div className="w-64 h-4 bg-gray-100 rounded-full" />
           </div>
           <div className="w-full sm:w-72">
-            <div className="w-full bg-gray-100 rounded-full h-9" />
+            <div className="w-full bg-gray-100 rounded-full h-10" />
           </div>
         </div>
 
@@ -84,14 +85,14 @@ export default function Products() {
     );
   }
 
-  const filteredProducts = data.data.data.filter((product) =>
+  const filteredProducts = productsQuery.data.data.data.filter((product) =>
     product.title.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
   return (
     <>
-      <section className="max-w-6xl px-4 pt-4 mx-auto sm:px-6 lg:px-8 sm:pt-6">
-        <div className="flex flex-col justify-between gap-3 mb-4 sm:flex-row sm:items-center">
+      <section className="">
+        <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
           <div>
             <h1 className="text-xl font-semibold text-gray-800 sm:text-2xl">
               All Products
@@ -112,7 +113,7 @@ export default function Products() {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-4 mt-4 products sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 sm:gap-5">
+        <div className="grid grid-cols-2 gap-2 mt-4 products sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
           {filteredProducts.map((product, idx) => (
             <ProductCard
               key={idx}

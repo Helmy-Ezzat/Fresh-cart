@@ -3,13 +3,14 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
+import config from "../config/env";
 
 export default function CategorySlider() {
   function getCategories() {
-    return axios.get("https://ecommerce.routemisr.com/api/v1/categories");
+    return axios.get(`${config.apiBaseUrl}/categories`);
   }
 
-  const { data, isLoading } = useQuery({
+  const categoriesQuery = useQuery({
     queryKey: ["categorySlider"],
     queryFn: getCategories,
   });
@@ -57,7 +58,7 @@ export default function CategorySlider() {
     ],
   };
 
-  if (isLoading) {
+  if (categoriesQuery.isLoading) {
     return (
       <div className="py-6 sm:py-8">
         <h2 className="mb-4 text-xl font-bold text-gray-800 sm:text-2xl">
@@ -81,7 +82,7 @@ export default function CategorySlider() {
         Shop Popular Categories
       </h2>
       <Slider {...settings}>
-        {data?.data?.data.map((category) => (
+        {categoriesQuery.data?.data?.data.map((category) => (
           <div key={category._id} className="px-2">
             <div className="transition-transform duration-300 cursor-pointer hover:scale-105">
               <div className="overflow-hidden rounded-2xl bg-gray-50 shadow-sm hover:shadow-md transition-shadow">

@@ -1,16 +1,17 @@
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
+import config from "../config/env";
 
 export default function Brands() {
   async function getBrands() {
-    return axios.get(`https://ecommerce.routemisr.com/api/v1/brands`);
+    return axios.get(`${config.apiBaseUrl}/brands`);
   }
-  const { isLoading, data } = useQuery({
+  const brandsQuery = useQuery({
     queryKey: ["getBrands"],
     queryFn: getBrands,
   });
-  console.log(data);
-  if (isLoading) {
+  console.log(brandsQuery.data);
+  if (brandsQuery.isLoading) {
     return (
       <div className="container mt-2">
         <div className="row">
@@ -35,7 +36,7 @@ export default function Brands() {
     <>
       <div className="container mt-2">
         <div className="row">
-          {data.data.data.map((category, idx) => {
+          {brandsQuery.data.data.data.map((category, idx) => {
             return (
               <>
                 <div

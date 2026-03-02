@@ -1,137 +1,114 @@
-# FreshCart - E-commerce Application
+# FreshCart E-Commerce
 
-A modern, responsive e-commerce application built with React and Zustand for state management.
+Modern e-commerce application built with React, TypeScript, and Zustand.
 
-## 🚀 Features
+## Tech Stack
 
-- **User Authentication** - Login/Register with JWT
-- **Product Catalog** - Browse products with categories and brands
-- **Shopping Cart** - Add/remove items with real-time updates
-- **Wishlist** - Save favorite products
-- **Order Management** - View order history
-- **Payment Integration** - Secure checkout process
-- **Responsive Design** - Mobile-first approach with Tailwind CSS
-- **Modern UI** - Clean interface with Lucide icons
-
-## 🛠️ Tech Stack
-
-- **React** - UI library
+- **React 18** - UI library
+- **TypeScript** - Type safety
 - **Zustand** - State management
 - **React Router** - Navigation
-- **TanStack Query** - Data fetching and caching
+- **TanStack Query** - Data fetching
 - **Axios** - HTTP client
 - **Tailwind CSS** - Styling
-- **Lucide React** - Icons
-- **React Slick** - Carousels
-- **React Hot Toast** - Notifications
+- **Formik + Yup** - Forms & validation
 
-## 📁 Project Structure
-
-```
-src/
-├── pages/              # Page components (routes)
-├── components/         # Reusable components
-│   ├── layout/        # Layout components (Navbar, Footer, etc.)
-│   ├── ui/            # UI components (ProductCard, Buttons, etc.)
-│   └── sliders/       # Slider components
-├── stores/            # Zustand stores
-├── hooks/             # Custom React hooks
-├── config/            # Configuration files
-└── assets/            # Static assets
-```
-
-## 🚦 Getting Started
+## Getting Started
 
 ### Prerequisites
-
-- Node.js (v14 or higher)
+- Node.js 16+
 - npm or yarn
 
 ### Installation
 
-1. Clone the repository
 ```bash
-git clone https://github.com/Helmy-Ezzat/Fresh-cart.git
-cd Fresh-cart
-```
-
-2. Install dependencies
-```bash
+# Install dependencies
 npm install
-```
 
-3. Create `.env` file
-```bash
+# Copy environment file
 cp .env.example .env
+
+# Update .env with your API URL
+REACT_APP_API_BASE_URL=https://your-api-url.com/api/v1
 ```
 
-4. Update environment variables in `.env`
+### Development
+
+```bash
+# Start development server
+npm start
+
+# Build for production
+npm run build
+
+# Run tests
+npm test
+
+# Type check
+npm run type-check
 ```
-REACT_APP_API_BASE_URL=https://ecommerce.routemisr.com/api/v1
+
+## Project Structure
+
+```
+src/
+├── components/       # Reusable UI components
+│   ├── layout/      # Layout components (Navbar, Footer)
+│   ├── ui/          # UI components (ProductCard, Button)
+│   └── sliders/     # Slider components
+├── pages/           # Page components
+├── stores/          # Zustand stores
+│   ├── userStore.ts
+│   ├── cartStore.ts
+│   └── wishlistStore.ts
+├── hooks/           # Custom React hooks
+├── config/          # Configuration files
+├── types/           # TypeScript type definitions
+└── Assets/          # Images and static files
+```
+
+## State Management
+
+Using Zustand for simple and efficient state management:
+
+```typescript
+// Using stores
+import { useUserStore, useCartStore } from './stores';
+
+function MyComponent() {
+  const userToken = useUserStore((state) => state.userToken);
+  const addToCart = useCartStore((state) => state.addProductToCart);
+  
+  // Use them...
+}
+```
+
+## Environment Variables
+
+Required variables in `.env`:
+
+```env
+REACT_APP_API_BASE_URL=https://api.example.com/api/v1
 REACT_APP_PAYMENT_REDIRECT_URL=http://localhost:3000
 ```
 
-5. Start development server
-```bash
-npm start
-```
+## Features
 
-The app will open at [http://localhost:3000](http://localhost:3000)
+- User authentication (login/register)
+- Product browsing and search
+- Shopping cart management
+- Wishlist functionality
+- Order history
+- Payment integration
+- Responsive design
 
-## 📦 Available Scripts
+## Available Scripts
 
 - `npm start` - Run development server
-- `npm build` - Build for production
+- `npm run build` - Build for production
 - `npm test` - Run tests
-- `npm eject` - Eject from Create React App
+- `npm run type-check` - Check TypeScript types
 
-## 🎨 Key Features Implementation
+## License
 
-### State Management (Zustand)
-- User authentication state
-- Shopping cart management
-- Wishlist management
-- Persistent storage with localStorage
-
-### Responsive Design
-- Mobile-first approach
-- Breakpoints: sm (640px), md (768px), lg (1024px), xl (1280px)
-- Touch-friendly UI elements
-
-### Performance Optimizations
-- Code splitting with React.lazy
-- Memoization with useMemo
-- Optimized re-renders
-- Image lazy loading
-
-## 🔐 Environment Variables
-
-| Variable | Description | Default |
-|----------|-------------|---------|
-| `REACT_APP_API_BASE_URL` | Backend API URL | - |
-| `REACT_APP_PAYMENT_REDIRECT_URL` | Payment redirect URL | - |
-
-## 📝 Documentation
-
-- [Zustand Best Practices](./ZUSTAND_BEST_PRACTICES.md)
-- [Migration Guide](./ZUSTAND_MIGRATION.md)
-- [Folder Structure](./FOLDER_STRUCTURE.md)
-- [Environment Setup](./ENV_SETUP.md)
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## 📄 License
-
-This project is licensed under the MIT License.
-
-## 👨‍💻 Author
-
-**Helmy Ezzat**
-- GitHub: [@Helmy-Ezzat](https://github.com/Helmy-Ezzat)
-
-## 🙏 Acknowledgments
-
-- [Route Academy](https://www.routemisr.com/) for the API
-- React community for amazing tools and libraries
+MIT

@@ -2,18 +2,19 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Audio } from "react-loader-spinner";
 import { useQuery } from "@tanstack/react-query";
+import config from "../config/env";
 
 export default function Category() {
   //const [categoryList, setCategory] = useState([])
   async function getCategory() {
-    return axios.get(`https://ecommerce.routemisr.com/api/v1/categories`);
+    return axios.get(`${config.apiBaseUrl}/categories`);
   }
-  const { isLoading, data } = useQuery({
+  const categoriesQuery = useQuery({
     queryKey: ["getCategory"],
     queryFn: getCategory,
   });
-  console.log(data);
-  if (isLoading) {
+  console.log(categoriesQuery.data);
+  if (categoriesQuery.isLoading) {
     return (
       <div className="container mt-2">
         <div className="row">
@@ -38,7 +39,7 @@ export default function Category() {
     <>
       <div className="container mt-2">
         <div className="row">
-          {data.data.data.map((category, idx) => {
+          {categoriesQuery.data.data.data.map((category, idx) => {
             return (
               <>
                 <div
