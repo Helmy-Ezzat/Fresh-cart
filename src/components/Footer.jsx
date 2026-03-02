@@ -70,7 +70,9 @@ export default function Footer() {
             </h5>
             <div className="flex flex-wrap lg:justify-end items-center gap-3 sm:gap-4">
               <a 
-                href="#" 
+                href="https://apps.apple.com" 
+                target="_blank"
+                rel="noopener noreferrer"
                 className="block hover:scale-105 transition-transform duration-300"
               >
                 <img 
@@ -80,7 +82,9 @@ export default function Footer() {
                 />
               </a>
               <a 
-                href="#" 
+                href="https://play.google.com" 
+                target="_blank"
+                rel="noopener noreferrer"
                 className="block hover:scale-105 transition-transform duration-300"
               >
                 <img 

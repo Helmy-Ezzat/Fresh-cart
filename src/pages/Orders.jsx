@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import emptyimg from "../Assets/images/preview.png";

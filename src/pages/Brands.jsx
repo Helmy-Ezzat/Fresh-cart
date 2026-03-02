@@ -43,7 +43,7 @@ export default function Brands() {
                   className="col-6 col-sm-4 col-md-3 col-lg-2 gy-3 rounded-3"
                   key={idx}
                 >
-                  <img src={category.image} className="w-100" height={300} />
+                  <img src={category.image} className="w-100" height={300} alt={category.name} />
                   <h3 className="m-2 text-center text-main fw-bold">
                     {category.name}
                   </h3>

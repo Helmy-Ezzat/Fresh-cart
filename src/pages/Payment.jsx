@@ -7,8 +7,6 @@ import config from "../config/env";
 
 export default function Payment() {
   const cartID = useCartStore((state) => state.cartID);
-  const getUserCart = useCartStore((state) => state.getUserCart);
-  const numOfCartItems = useCartStore((state) => state.numOfCartItems);
   const nav = useNavigate();
 
   function comfirmOnlinePayment() {
