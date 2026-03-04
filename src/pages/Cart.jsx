@@ -68,10 +68,6 @@ export default function Cart() {
       <div className="flex min-h-[60vh] justify-center items-center px-4">
         <div className="space-y-3 text-center">
           <h4 className="text-xl font-semibold text-gray-800">Cart is empty</h4>
-          <p className="max-w-md mx-auto text-sm text-gray-500">
-            ابدأ بإضافة المنتجات إلى السلة، وهتظهر هنا عشان تقدر تكمل عملية
-            الدفع بسهولة.
-          </p>
           <div className="flex justify-center">
             <img
               src={emptyimg}
