@@ -1,7 +1,10 @@
 import { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 import { useUserStore, useCartStore, useWishlistStore } from '../stores';
 import { ShoppingCart, Heart, Receipt, LogOut } from 'lucide-react';
+import config from '../config/env';
 
 export default function UserMenu() {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,6 +17,20 @@ export default function UserMenu() {
   const resetWishlist = useWishlistStore((state) => state.resetWishlist);
   const numOfCartItems = useCartStore((state) => state.numOfCartItems);
   const numOfWishlistItems = useWishlistStore((state) => state.numOfWishlistItems);
+
+  // Fetch orders count
+  const ordersQuery = useQuery({
+    queryKey: ['ordersCount', userData?.id],
+    queryFn: async () => {
+      if (!userData?.id) return { data: [] };
+      const response = await axios.get(`${config.apiBaseUrl}/orders/user/${userData.id}`);
+      return response.data;
+    },
+    enabled: !!userData?.id,
+    refetchOnWindowFocus: false,
+  });
+
+  const numOfOrders = ordersQuery.data?.length || 0;
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -44,7 +61,7 @@ export default function UserMenu() {
   };
 
   const userInitial = userData?.name?.charAt(0).toUpperCase() || 'U';
-  const totalNotifications = numOfCartItems + numOfWishlistItems;
+  const totalNotifications = numOfCartItems + numOfWishlistItems + numOfOrders;
 
   return (
     <div className="relative" ref={menuRef}>
@@ -127,6 +144,11 @@ export default function UserMenu() {
                 <div className="flex-1">
                   <span className="font-medium">My Orders</span>
                 </div>
+                {numOfOrders > 0 && (
+                  <span className="inline-flex items-center justify-center px-2 py-0.5 text-xs font-bold text-white bg-blue-500 rounded-full">
+                    {numOfOrders}
+                  </span>
+                )}
               </Link>
             </div>
 

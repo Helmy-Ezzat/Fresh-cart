@@ -1,7 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "react-hot-toast";
-import { Offline } from "react-detect-offline";
 
 import { Layout, ProtectedRoute } from "./components";
 import {
@@ -18,7 +17,7 @@ import {
   WishList,
   Orders,
 } from "./pages";
-import { useStoreInitializer } from "./hooks/useStoreInitializer";
+import { useStoreInitializer } from "./hooks";
 
 // Create router outside component to prevent recreation on every render
 const router = createBrowserRouter([
@@ -105,7 +104,7 @@ const router = createBrowserRouter([
   },
 ]);
 
-// Create QueryClient outside component
+// Create QueryClient with custom configuration
 const queryClient = new QueryClient();
 
 export default function App() {
@@ -115,14 +114,8 @@ export default function App() {
     <>
       <QueryClientProvider client={queryClient}>
         <RouterProvider router={router} />
-        {/* <ReactQueryDevtools initialIsOpen="false" position="bottom-right" /> */}
       </QueryClientProvider>
       <Toaster />
-      <Offline>
-        <div className="fixed inset-x-0 top-0 z-40 py-1 text-xs text-center text-white bg-gray-900 sm:text-sm">
-          Your Internet Connection has been corrupted
-        </div>
-      </Offline>
     </>
   );
 }

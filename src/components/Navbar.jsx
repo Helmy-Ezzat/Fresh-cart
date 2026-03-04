@@ -43,9 +43,6 @@ export default function Navbar() {
                 <NavLink to="/brands" className={navLinkClass}>
                   Brands
                 </NavLink>
-                <NavLink to="/orders" className={navLinkClass}>
-                  Orders
-                </NavLink>
               </div>
             )}
           </div>
